@@ -34,15 +34,14 @@ class ViewController: UIViewController {
             
             let originPoint = self.view.center
             
-            let xDiff = (originPoint.x - touchPoint.x)
-            let yDiff = (originPoint.y - touchPoint.y)
-            let distance = Double(sqrt((pow(xDiff,2) + pow(yDiff,2))))
+            let xDiff = Double(touchPoint.x - originPoint.x)
+            let yDiff = Double(touchPoint.y - originPoint.y)
+            let distance = sqrt((pow(xDiff,2) + pow(yDiff,2)))
             
-            var roundedDistance: Double = 0
             var pixelDensity: Double = 0
             let screenScale: Double = Double(UIScreen.mainScreen().scale)
             
-            //Configuration for different devices
+            //Configure pixel density calculation for different devices
             let viewHeight = self.view.frame.height
             if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
                 pixelDensity = 326
@@ -56,11 +55,26 @@ class ViewController: UIViewController {
             let pixelDistance = distance * screenScale
             let inchDistance = pixelDistance / pixelDensity
             let mmDistance = inchDistance * 25.4
-            roundedDistance = round(mmDistance * 100) / 100
+            let roundedDistance = round(mmDistance * 1000) / 1000
             
             distanceLabel.text = "\(roundedDistance) mm"
+            
+            //Set up coordinate measurements in mm
+            let xPixelDistance = xDiff * screenScale
+            let xinchDistance = xPixelDistance / pixelDensity
+            let mmXDistance = xinchDistance * 25.4
+            let roundedXDistance = round(mmXDistance * 1000) / 1000
+            
+            let yPixelDistance = yDiff * screenScale
+            let yinchDistance = yPixelDistance / pixelDensity
+            let mmYDistance = yinchDistance * 25.4
+            let roundedYDistance = round(mmYDistance * 1000) / 1000
+
+            let coordinateString = "(\(roundedXDistance), \(roundedYDistance))"
+            
             if (isReading) {
                 mainInstance.measurementList += [distanceLabel.text!]
+                mainInstance.coordinateList += [coordinateString]
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))

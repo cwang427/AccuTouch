@@ -10,8 +10,10 @@ import Foundation
 
 class Main {
     var measurementList: [String] = []
-    init(measurementList: [String]) {
+    var coordinateList: [String] = []
+    init(measurementList: [String], coordinateList: [String]) {
         self.measurementList = measurementList
+        self.coordinateList = coordinateList
     }
 }
-var mainInstance = Main(measurementList: [])
+var mainInstance = Main(measurementList: [], coordinateList: [])

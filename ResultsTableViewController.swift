@@ -39,6 +39,9 @@ class ResultsTableViewController: UITableViewController {
         let row = indexPath.row
         let measurement = mainInstance.measurementList[row]
         cell.measurementLabel.text = measurement
+        
+        let coordinate = mainInstance.coordinateList[row]
+        cell.coordinateLabel.text = coordinate
 
         return cell
     }

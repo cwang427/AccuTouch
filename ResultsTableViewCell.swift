@@ -11,6 +11,7 @@ import UIKit
 class ResultsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var measurementLabel: UILabel!
+    @IBOutlet weak var coordinateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

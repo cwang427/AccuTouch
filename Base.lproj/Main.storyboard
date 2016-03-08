@@ -129,15 +129,24 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtZ-Ps-NBG">
+                                            <rect key="frame" x="550" y="25" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="VtZ-Ps-NBG" firstAttribute="trailing" secondItem="cCY-He-VDo" secondAttribute="trailingMargin" id="H3F-LU-STl"/>
                                         <constraint firstItem="TPp-im-zXZ" firstAttribute="leading" secondItem="cCY-He-VDo" secondAttribute="leadingMargin" id="Qza-Jj-f6f"/>
+                                        <constraint firstItem="VtZ-Ps-NBG" firstAttribute="centerY" secondItem="TPp-im-zXZ" secondAttribute="centerY" id="l4o-gK-byV"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <constraints>
                                     <constraint firstItem="TPp-im-zXZ" firstAttribute="centerY" secondItem="9dX-wm-btm" secondAttribute="centerY" id="vhK-YK-eUY"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="coordinateLabel" destination="VtZ-Ps-NBG" id="Xbq-3v-zSB"/>
                                     <outlet property="measurementLabel" destination="TPp-im-zXZ" id="lvS-R3-K8e"/>
                                 </connections>
                             </tableViewCell>
