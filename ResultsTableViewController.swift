@@ -14,6 +14,7 @@ class ResultsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
     }
 
     override func didReceiveMemoryWarning() {
