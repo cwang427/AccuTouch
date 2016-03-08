@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var readingStateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     var isReading: Bool = false
-//    var measurementList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,27 +37,26 @@ class ViewController: UIViewController {
             let xDiff = (originPoint.x - touchPoint.x)
             let yDiff = (originPoint.y - touchPoint.y)
             let distance = Double(sqrt((pow(xDiff,2) + pow(yDiff,2))))
+            
             var roundedDistance: Double = 0
+            var pixelDensity: Double = 0
+            let screenScale: Double = Double(UIScreen.mainScreen().scale)
             
-            //Configuration for iPhone 4s with Retina 3.5
-            //2x scaling from point to pixel, 326 ppi
-            
-            if (self.view.frame.height == 480) {
-                let pixelDistance = distance * 2
-                let inchDistance = pixelDistance / 326
-                let mmDistance = inchDistance * 25.4
-                roundedDistance = round(mmDistance * 100) / 100
+            //Configuration for different devices
+            let viewHeight = self.view.frame.height
+            if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
+                pixelDensity = 326
+            } else if (self.view.frame.height == 736) {
+                pixelDensity = 401
+            } else {
+                let alert = UIAlertController(title: "Configuration Error", message: "Device not found in calculation configuration", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             }
             
-            //Configuration for iPhone 6s Plus with Retina HD 5.5 (1242 x 2208 pixels)
-            //3x scaling from point to pixel, 401 ppi
-            
-            else if (self.view.frame.height == 736) {
-                let pixelDistance = distance * 3
-                let inchDistance = pixelDistance / 401
-                let mmDistance = inchDistance * 25.4
-                roundedDistance = round(mmDistance * 100) / 100
-            }
+            let pixelDistance = distance * screenScale
+            let inchDistance = pixelDistance / pixelDensity
+            let mmDistance = inchDistance * 25.4
+            roundedDistance = round(mmDistance * 100) / 100
             
             distanceLabel.text = "\(roundedDistance) mm"
             if (isReading) {
