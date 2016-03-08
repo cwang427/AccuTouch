@@ -18,24 +18,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhP-90-otf" userLabel="Touch origin">
-                                <rect key="frame" x="293" y="292.5" width="15" height="15"/>
+                                <rect key="frame" x="293" y="292" width="15" height="15"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.63137254899999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="C0J-aK-pYe"/>
                                     <constraint firstAttribute="height" constant="15" id="MnT-Td-mku"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 mm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ao8-o6-MHi">
+                                <rect key="frame" x="267" y="560" width="67" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrq-HQ-HRc">
+                                <rect key="frame" x="251" y="509" width="98" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="lrq-HQ-HRc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="87S-bj-xh1"/>
+                            <constraint firstItem="ao8-o6-MHi" firstAttribute="top" secondItem="lrq-HQ-HRc" secondAttribute="bottom" constant="20" id="OLX-9f-8lh"/>
                             <constraint firstItem="WhP-90-otf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YkM-dz-TOz"/>
                             <constraint firstItem="WhP-90-otf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gQs-0f-LAP"/>
+                            <constraint firstItem="ao8-o6-MHi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mXy-t3-fZd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ao8-o6-MHi" secondAttribute="bottom" constant="20" id="zqs-jJ-nhS"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="wkd-Kj-sQ5" appends="YES" id="Mts-Jw-Rp1"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="distanceLabel" destination="ao8-o6-MHi" id="0tx-cE-FGx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="wkd-Kj-sQ5">
