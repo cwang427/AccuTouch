@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
 
@@ -63,6 +64,8 @@ class ViewController: UIViewController {
             if (isReading) {
                 mainInstance.measurementList += [distanceLabel.text!]
             }
+            
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }
     }
     
