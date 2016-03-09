@@ -11,15 +11,42 @@ import AudioToolbox
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var originWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var originView: UIView!
+    @IBOutlet weak var originHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var readingStateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     var isReading: Bool = false
+    
+    var pixelDensity: Double = 0
+    let screenScale: Double = Double(UIScreen.mainScreen().scale)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         readingStateLabel.text = "Not Reading"
         readingStateLabel.textColor = UIColor.redColor()
+        
+        //Set pixel density for different devices
+        let viewHeight = self.view.frame.height
+        if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
+            pixelDensity = 326
+        } else if (self.view.frame.height == 736) {
+            pixelDensity = 401
+        } else {
+            let alert = UIAlertController(title: "Configuration Error", message: "Device not found in calculation configuration", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        }
+        
+        //Make origin point a circle whose profile matches forceps tip (0.2 inch = 5.08 mm diameter)
+        let pixelSides = 0.2 * pixelDensity
+        let pointSides = pixelSides / screenScale
+        originView.frame.size.height = CGFloat(pointSides)
+        originView.frame.size.width = CGFloat(pointSides)
+        originWidthConstraint.constant = CGFloat(pointSides)
+        originHeightConstraint.constant = CGFloat(pointSides)
+        originView.layer.cornerRadius = originView.frame.size.width / 2
+        originView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,26 +65,12 @@ class ViewController: UIViewController {
             let yDiff = Double(touchPoint.y - originPoint.y)
             let distance = sqrt((pow(xDiff,2) + pow(yDiff,2)))
             
-            var pixelDensity: Double = 0
-            let screenScale: Double = Double(UIScreen.mainScreen().scale)
-            
-            //Configure pixel density calculation for different devices
-            let viewHeight = self.view.frame.height
-            if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
-                pixelDensity = 326
-            } else if (self.view.frame.height == 736) {
-                pixelDensity = 401
-            } else {
-                let alert = UIAlertController(title: "Configuration Error", message: "Device not found in calculation configuration", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            }
-            
             let pixelDistance = distance * screenScale
             let inchDistance = pixelDistance / pixelDensity
             let mmDistance = inchDistance * 25.4
             let roundedDistance = round(mmDistance * 1000) / 1000
             
-            distanceLabel.text = "\(roundedDistance) mm"
+            distanceLabel.text = "\(roundedDistance) mm ± 2.54 mm"
             
             //Set up coordinate measurements in mm
             let xPixelDistance = xDiff * screenScale
