@@ -99,6 +99,7 @@ class ViewController: UIViewController {
         readingStateLabel.text = "Reading"
         readingStateLabel.textColor = UIColor.greenColor()
         mainInstance.measurementList = []
+        mainInstance.coordinateList = []
     }
     
     @IBAction func endReading() {
