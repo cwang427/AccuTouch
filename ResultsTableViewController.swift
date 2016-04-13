@@ -42,7 +42,23 @@ class ResultsTableViewController: UITableViewController {
         
         let coordinate = mainInstance.coordinateList[row]
         cell.coordinateLabel.text = coordinate
-
+        
+        //Start of each set has green background; end has red
+        if (row % 10 == 0) {
+            cell.backgroundColor = UIColor.greenColor()
+        } else if (row % 9 == 0) {
+            cell.backgroundColor = UIColor.redColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+        
         return cell
+    }
+    
+    @IBAction func clearData(sender: UIBarButtonItem) {
+        mainInstance.coordinateList = []
+        mainInstance.measurementList = []
+        self.tableView.reloadData()
+        numReadings = 0
     }
 }

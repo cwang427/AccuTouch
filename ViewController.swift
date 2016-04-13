@@ -9,15 +9,26 @@
 import UIKit
 import AudioToolbox
 
+var numReadings: Int = 0
+
 class ViewController: UIViewController {
 
+    //Outlets for view constants
     @IBOutlet weak var originWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var originView: UIView!
     @IBOutlet weak var originHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var originCenterX: NSLayoutConstraint!
+    @IBOutlet weak var originCenterY: NSLayoutConstraint!
+    
+    //Labels
     @IBOutlet weak var readingStateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var numReadingsLabel: UILabel!
+    
+    //Reading state variables
     var isReading: Bool = false
     
+    //Screen settings
     var pixelDensity: Double = 0
     let screenScale: Double = Double(UIScreen.mainScreen().scale)
     
@@ -59,7 +70,7 @@ class ViewController: UIViewController {
         if (sender.state == UIGestureRecognizerState.Began) {
             let touchPoint = sender.locationInView(self.view)
             
-            let originPoint = self.view.center
+            let originPoint = originView.center
             
             let xDiff = Double(touchPoint.x - originPoint.x)
             let yDiff = Double(touchPoint.y - originPoint.y)
@@ -70,7 +81,7 @@ class ViewController: UIViewController {
             let mmDistance = inchDistance * 25.4
             let roundedDistance = round(mmDistance * 1000) / 1000
             
-            distanceLabel.text = "\(roundedDistance) mm ± 2.54 mm"
+            distanceLabel.text = "\(roundedDistance) ± 2.54 mm"
             
             //Set up coordinate measurements in mm
             let xPixelDistance = xDiff * screenScale
@@ -88,6 +99,14 @@ class ViewController: UIViewController {
             if (isReading) {
                 mainInstance.measurementList += [distanceLabel.text!]
                 mainInstance.coordinateList += [coordinateString]
+                if (numReadings == 9) {
+                    endReading()
+                    numReadings = 0
+                    numReadingsLabel.text = "\(numReadings)"
+                } else {
+                    numReadings += 1
+                    numReadingsLabel.text = "\(numReadings)"
+                }
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
@@ -98,8 +117,6 @@ class ViewController: UIViewController {
         isReading = true
         readingStateLabel.text = "Reading"
         readingStateLabel.textColor = UIColor.greenColor()
-        mainInstance.measurementList = []
-        mainInstance.coordinateList = []
     }
     
     @IBAction func endReading() {
