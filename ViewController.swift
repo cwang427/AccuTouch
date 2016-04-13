@@ -70,8 +70,8 @@ class ViewController: UIViewController {
         topBound = topOffset + Int(ceil(originHeightConstraint.constant)) + 10
         
         //Set bottom boundary for randomization
-        let bottomOffset = Int(ceil(distanceLabel.center.y - distanceLabel.frame.height))
-        bottomBound = bottomOffset - Int(ceil(originHeightConstraint.constant)) - 20
+        let bottomOffset = Int(floor(distanceLabel.center.y - distanceLabel.frame.height))
+        bottomBound = bottomOffset - Int(ceil(originHeightConstraint.constant)) - 100
         
         //Set side boundaries
         leftBound = Int(ceil(originWidthConstraint.constant)) + 10
