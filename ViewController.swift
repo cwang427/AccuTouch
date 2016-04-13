@@ -32,6 +32,12 @@ class ViewController: UIViewController {
     var pixelDensity: Double = 0
     let screenScale: Double = Double(UIScreen.mainScreen().scale)
     
+    //Randomization bounds
+    var bottomBound: Int = 0
+    var topBound: Int = 0
+    var leftBound: Int = 0
+    var rightBound: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +48,7 @@ class ViewController: UIViewController {
         let viewHeight = self.view.frame.height
         if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
             pixelDensity = 326
-        } else if (self.view.frame.height == 736) {
+        } else if (viewHeight == 736) {
             pixelDensity = 401
         } else {
             let alert = UIAlertController(title: "Configuration Error", message: "Device not found in calculation configuration", preferredStyle: .Alert)
@@ -58,6 +64,20 @@ class ViewController: UIViewController {
         originHeightConstraint.constant = CGFloat(pointSides)
         originView.layer.cornerRadius = originView.frame.size.width / 2
         originView.clipsToBounds = true
+        
+        //Set top boundary for randomization
+        let topOffset = Int(ceil(numReadingsLabel.center.y + numReadingsLabel.frame.height))
+        topBound = topOffset + Int(ceil(originHeightConstraint.constant)) + 10
+        
+        //Set bottom boundary for randomization
+        let bottomOffset = Int(ceil(distanceLabel.center.y - distanceLabel.frame.height))
+        bottomBound = bottomOffset - Int(ceil(originHeightConstraint.constant)) - 20
+        
+        //Set side boundaries
+        leftBound = Int(ceil(originWidthConstraint.constant)) + 10
+        rightBound = Int(ceil(self.view.frame.width - originWidthConstraint.constant)) - 10
+        
+        randomizePosition()
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,14 +122,15 @@ class ViewController: UIViewController {
                 if (numReadings == 9) {
                     endReading()
                     numReadings = 0
-                    numReadingsLabel.text = "\(numReadings)"
                 } else {
                     numReadings += 1
-                    numReadingsLabel.text = "\(numReadings)"
                 }
+                numReadingsLabel.text = "\(numReadings)"
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            randomizePosition()
         }
     }
     
@@ -126,7 +147,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
+        numReadingsLabel.text = "\(numReadings)"
+    }
+    
+    func randomizePosition() {
+        let xPosRandom = Int(arc4random_uniform(UInt32(rightBound - leftBound) + 1)) + leftBound
+        let yPosRandom = Int(arc4random_uniform(UInt32(bottomBound - topBound) + 1)) + topBound
         
+        let xPosOffset = xPosRandom - Int(self.view.center.x)
+        let yPosOffset = yPosRandom - Int(self.view.center.y)
+        
+        originCenterX.constant = CGFloat(xPosOffset)
+        originCenterY.constant = CGFloat(yPosOffset)
     }
 }
 

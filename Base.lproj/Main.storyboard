@@ -76,18 +76,18 @@
                         <constraints>
                             <constraint firstItem="ao8-o6-MHi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3uW-Hs-icc"/>
                             <constraint firstItem="ZiT-Hb-Zs7" firstAttribute="centerY" secondItem="bW3-QF-CT1" secondAttribute="centerY" id="6D2-JH-d7C"/>
+                            <constraint firstItem="WhP-90-otf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Bb5-o5-cD5"/>
                             <constraint firstItem="o3C-3P-rMk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CqL-gF-jcO"/>
                             <constraint firstItem="o3C-3P-rMk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DhS-d1-663"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aU1-bP-mvE" secondAttribute="bottom" constant="20" id="GK8-vk-gNa"/>
                             <constraint firstItem="bW3-QF-CT1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IQz-Kp-1u4"/>
                             <constraint firstItem="ZiT-Hb-Zs7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="UMS-IT-yMh"/>
-                            <constraint firstItem="WhP-90-otf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YkM-dz-TOz"/>
                             <constraint firstItem="aU1-bP-mvE" firstAttribute="centerY" secondItem="ao8-o6-MHi" secondAttribute="centerY" id="bEk-jM-UWN"/>
-                            <constraint firstItem="WhP-90-otf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gQs-0f-LAP"/>
                             <constraint firstItem="aU1-bP-mvE" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jfs-MQ-8zh"/>
                             <constraint firstItem="ZiT-Hb-Zs7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="l5m-X9-08X"/>
                             <constraint firstItem="j5P-kg-8ZJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="shh-Ra-rt1"/>
                             <constraint firstItem="j5P-kg-8ZJ" firstAttribute="top" secondItem="bW3-QF-CT1" secondAttribute="bottom" constant="5" id="uVQ-MX-Trq"/>
+                            <constraint firstItem="WhP-90-otf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wBd-rs-8Hn"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="wkd-Kj-sQ5" appends="YES" id="Mts-Jw-Rp1"/>
@@ -96,8 +96,8 @@
                     <connections>
                         <outlet property="distanceLabel" destination="ao8-o6-MHi" id="0tx-cE-FGx"/>
                         <outlet property="numReadingsLabel" destination="j5P-kg-8ZJ" id="CLz-cA-k1K"/>
-                        <outlet property="originCenterX" destination="YkM-dz-TOz" id="5fD-n6-C6q"/>
-                        <outlet property="originCenterY" destination="gQs-0f-LAP" id="KC4-pQ-W4J"/>
+                        <outlet property="originCenterX" destination="wBd-rs-8Hn" id="wkn-8k-RbR"/>
+                        <outlet property="originCenterY" destination="Bb5-o5-cD5" id="IBu-Kf-a7a"/>
                         <outlet property="originHeightConstraint" destination="MnT-Td-mku" id="YCW-Nq-NJf"/>
                         <outlet property="originView" destination="WhP-90-otf" id="1Dz-n6-sJQ"/>
                         <outlet property="originWidthConstraint" destination="C0J-aK-pYe" id="aOP-Qy-rOm"/>
