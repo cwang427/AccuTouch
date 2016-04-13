@@ -46,7 +46,7 @@ class ResultsTableViewController: UITableViewController {
         //Start of each set has green background; end has red
         if (row % 10 == 0) {
             cell.backgroundColor = UIColor.greenColor()
-        } else if (row % 9 == 0) {
+        } else if ((row + 1) % 10 == 0) {
             cell.backgroundColor = UIColor.redColor()
         } else {
             cell.backgroundColor = UIColor.whiteColor()
