@@ -118,8 +118,6 @@ class ViewController: UIViewController {
             let coordinateString = "(\(roundedXDistance), \(roundedYDistance))"
             
             if (isReading) {
-//                mainInstance.measurementList += [distanceLabel.text!]
-//                mainInstance.coordinateList += [coordinateString]
                 //If app is reading, create new data point and add to Realm
                 let newData = DataPoint()
                 newData.distance = distanceLabel.text!

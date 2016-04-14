@@ -49,8 +49,6 @@ class ResultsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let count = mainInstance.measurementList.count
-//        return count
         return dataPoints?.count ?? 0
     }
 
@@ -60,11 +58,6 @@ class ResultsTableViewController: UITableViewController {
         let row = indexPath.row
         let dataPoint = dataPoints[row] as DataPoint
         cell.dataPoint = dataPoint
-//        let measurement = mainInstance.measurementList[row]
-//        cell.measurementLabel.text = measurement
-        
-//        let coordinate = mainInstance.coordinateList[row]
-//        cell.coordinateLabel.text = coordinate
         
         //Start of each set has green background; end has red
         if (row % 10 == 0) {
@@ -82,10 +75,6 @@ class ResultsTableViewController: UITableViewController {
         let alert = UIAlertController(title: "Clearing data", message: "Are you sure you want to clear the stored data?", preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { void in
-//            mainInstance.coordinateList = []
-//            mainInstance.measurementList = []
-//            self.tableView.reloadData()
-//            numReadings = 0
             do {
                 let realm = try Realm()
                 try realm.write() {
