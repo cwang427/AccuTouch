@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ResultsTableViewController: UITableViewController {
 
@@ -15,6 +16,17 @@ class ResultsTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
+        
+        //Load data points from Realm
+        do {
+            let realm = try Realm()
+            dataPoints = realm.objects(DataPoint)
+        } catch {
+            let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,24 +36,35 @@ class ResultsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    //Create auto-updating container to hold DataPoint objects
+    var dataPoints: Results<DataPoint>! {
+        didSet {
+            //When dataPoints update, update the table view
+            self.tableView.reloadData()
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = mainInstance.measurementList.count
-        return count
+//        let count = mainInstance.measurementList.count
+//        return count
+        return dataPoints?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ResultCell", forIndexPath: indexPath) as! ResultsTableViewCell
         
         let row = indexPath.row
-        let measurement = mainInstance.measurementList[row]
-        cell.measurementLabel.text = measurement
+        let dataPoint = dataPoints[row] as DataPoint
+        cell.dataPoint = dataPoint
+//        let measurement = mainInstance.measurementList[row]
+//        cell.measurementLabel.text = measurement
         
-        let coordinate = mainInstance.coordinateList[row]
-        cell.coordinateLabel.text = coordinate
+//        let coordinate = mainInstance.coordinateList[row]
+//        cell.coordinateLabel.text = coordinate
         
         //Start of each set has green background; end has red
         if (row % 10 == 0) {
@@ -56,9 +79,29 @@ class ResultsTableViewController: UITableViewController {
     }
     
     @IBAction func clearData(sender: UIBarButtonItem) {
-        mainInstance.coordinateList = []
-        mainInstance.measurementList = []
-        self.tableView.reloadData()
-        numReadings = 0
+        let alert = UIAlertController(title: "Clearing data", message: "Are you sure you want to clear the stored data?", preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { void in
+//            mainInstance.coordinateList = []
+//            mainInstance.measurementList = []
+//            self.tableView.reloadData()
+//            numReadings = 0
+            do {
+                let realm = try Realm()
+                try realm.write() {
+                    realm.deleteAll()
+                }
+                self.tableView.reloadData()
+                numReadings = 0
+            } catch {
+                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

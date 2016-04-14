@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioToolbox
+import RealmSwift
 
 var numReadings: Int = 0
 
@@ -117,8 +118,24 @@ class ViewController: UIViewController {
             let coordinateString = "(\(roundedXDistance), \(roundedYDistance))"
             
             if (isReading) {
-                mainInstance.measurementList += [distanceLabel.text!]
-                mainInstance.coordinateList += [coordinateString]
+//                mainInstance.measurementList += [distanceLabel.text!]
+//                mainInstance.coordinateList += [coordinateString]
+                //If app is reading, create new data point and add to Realm
+                let newData = DataPoint()
+                newData.distance = distanceLabel.text!
+                newData.coordinate = coordinateString
+                do {
+                    let realm = try Realm()
+                    try realm.write() {
+                        realm.add(newData)
+                    }
+                } catch {
+                    let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                
                 if (numReadings == 9) {
                     endReading()
                     numReadings = 0

@@ -23,5 +23,14 @@ class ResultsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    var dataPoint: DataPoint? {
+        didSet {
+            if let dataPoint = dataPoint, measurementLabel = measurementLabel, coordinateLabel = coordinateLabel {
+                measurementLabel.text = dataPoint.distance
+                coordinateLabel.text = dataPoint.coordinate
+            }
+        }
+    }
 
 }
