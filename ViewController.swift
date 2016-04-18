@@ -21,10 +21,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var originCenterX: NSLayoutConstraint!
     @IBOutlet weak var originCenterY: NSLayoutConstraint!
     
-    //Labels
+    //Labels and view elements
     @IBOutlet weak var readingStateLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var numReadingsLabel: UILabel!
+    @IBOutlet weak var stopButton: UIBarButtonItem!
+    @IBOutlet weak var resultsButton: UIBarButtonItem!
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var hudBar: UIToolbar!
     
     //Reading state variables
     var isReading: Bool = false
@@ -39,11 +42,24 @@ class ViewController: UIViewController {
     var leftBound: Int = 0
     var rightBound: Int = 0
     
+    //Timing
+    var timeStartDate: NSDate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        readingStateLabel.text = "Not Reading"
-        readingStateLabel.textColor = UIColor.redColor()
+        numReadings = 0
+        
+        readingStateLabel.text = "Not Recording"
+        readingStateLabel.textColor = UIColor(colorLiteralRed: 255/255, green: 169/255, blue: 115/255, alpha: 1)
+        
+        //Set up notification observer
+        let center = NSNotificationCenter.defaultCenter()
+        let queue = NSOperationQueue.mainQueue()
+        let appDelegate = UIApplication.sharedApplication().delegate
+        center.addObserverForName("Application Resign Active", object: appDelegate, queue: queue) { notification in
+            self.endReading()
+        }
         
         //Set pixel density for different devices
         let viewHeight = self.view.frame.height
@@ -67,11 +83,11 @@ class ViewController: UIViewController {
         originView.clipsToBounds = true
         
         //Set top boundary for randomization
-        let topOffset = Int(ceil(numReadingsLabel.center.y + numReadingsLabel.frame.height))
+        let topOffset = Int(ceil(hudBar.center.y + hudBar.frame.height))
         topBound = topOffset + Int(ceil(originHeightConstraint.constant)) + 10
         
         //Set bottom boundary for randomization
-        let bottomOffset = Int(floor(distanceLabel.center.y - distanceLabel.frame.height))
+        let bottomOffset = Int(floor(toolbar.center.y - toolbar.frame.height))
         bottomBound = bottomOffset - Int(ceil(originHeightConstraint.constant)) - 100
         
         //Set side boundaries
@@ -80,15 +96,18 @@ class ViewController: UIViewController {
         
         randomizePosition()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     @IBAction func measurePointLong(sender: UILongPressGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.Began) {
+            
+            //Start recording data and timer if not previously reading
+            if (!isReading) {
+                isReading = true
+                readingStateLabel.text = "Recording"
+                readingStateLabel.textColor = UIColor(colorLiteralRed: 88/255, green: 246/255, blue: 77/255, alpha: 1)
+                timeStartDate = NSDate()
+            }
+            
             let touchPoint = sender.locationInView(self.view)
             
             let originPoint = originView.center
@@ -101,8 +120,6 @@ class ViewController: UIViewController {
             let inchDistance = pixelDistance / pixelDensity
             let mmDistance = inchDistance * 25.4
             let roundedDistance = round(mmDistance * 1000) / 1000
-            
-            distanceLabel.text = "\(roundedDistance) ± 2.54 mm"
             
             //Set up coordinate measurements in mm
             let xPixelDistance = xDiff * screenScale
@@ -118,9 +135,10 @@ class ViewController: UIViewController {
             let coordinateString = "(\(roundedXDistance), \(roundedYDistance))"
             
             if (isReading) {
+                
                 //If app is reading, create new data point and add to Realm
                 let newData = DataPoint()
-                newData.distance = distanceLabel.text!
+                newData.distance = "\(roundedDistance) ± 2.54"
                 newData.coordinate = coordinateString
                 do {
                     let realm = try Realm()
@@ -133,36 +151,50 @@ class ViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-                
-                if (numReadings == 9) {
-                    endReading()
-                    numReadings = 0
-                } else {
-                    numReadings += 1
-                }
-                numReadingsLabel.text = "\(numReadings)"
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             randomizePosition()
+            
+            numReadings += 1
+            if (numReadings == 10) {
+                endReading()
+            }
+            numReadingsLabel.text = "Count: \(numReadings)"
         }
     }
     
-    @IBAction func beginReading() {
-        isReading = true
-        readingStateLabel.text = "Reading"
-        readingStateLabel.textColor = UIColor.greenColor()
-    }
-    
+    //Terminate set and stop timer
     @IBAction func endReading() {
         isReading = false
-        readingStateLabel.text = "Not Reading"
-        readingStateLabel.textColor = UIColor.redColor()
+        readingStateLabel.text = "Not Recording"
+        readingStateLabel.textColor = UIColor(colorLiteralRed: 255/255, green: 169/255, blue: 115/255, alpha: 1)
+        if (numReadings > 0) {
+            let stop = NSDate()
+            let stopTime = stop.timeIntervalSinceDate(timeStartDate)
+            let duration = "\(Double(round(10 * stopTime) / 10)) seconds"
+            let newDataSet = DataSet()
+            newDataSet.time = duration
+            newDataSet.count = numReadings
+            do {
+                let realm = try Realm()
+                try realm.write() {
+                    realm.add(newDataSet)
+                }
+            } catch {
+                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            numReadings = 0
+            numReadingsLabel.text = "Count: \(numReadings)"
+        }
     }
     
     @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
-        numReadingsLabel.text = "\(numReadings)"
+        numReadingsLabel.text = "Count: \(numReadings)"
     }
     
     func randomizePosition() {

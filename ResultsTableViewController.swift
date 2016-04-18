@@ -11,6 +11,8 @@ import RealmSwift
 
 class ResultsTableViewController: UITableViewController {
 
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -20,6 +22,7 @@ class ResultsTableViewController: UITableViewController {
         //Load data points from Realm
         do {
             let realm = try Realm()
+            dataSets = realm.objects(DataSet)
             dataPoints = realm.objects(DataPoint)
         } catch {
             let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
@@ -44,12 +47,21 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
+    //Hold DataSet objects
+    var dataSets: Results<DataSet>! {
+        didSet {
+            //When dataSets update, update the table view
+            self.tableView.reloadData()
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return dataSets?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataPoints?.count ?? 0
+        let dataSet = dataSets[section] as DataSet
+        return dataSet.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -59,16 +71,11 @@ class ResultsTableViewController: UITableViewController {
         let dataPoint = dataPoints[row] as DataPoint
         cell.dataPoint = dataPoint
         
-        //Start of each set has green background; end has red
-        if (row % 10 == 0) {
-            cell.backgroundColor = UIColor.greenColor()
-        } else if ((row + 1) % 10 == 0) {
-            cell.backgroundColor = UIColor.redColor()
-        } else {
-            cell.backgroundColor = UIColor.whiteColor()
-        }
-        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Set \(section + 1)  –  \(dataSets[section].count) points  –  \(dataSets[section].time)"
     }
     
     @IBAction func clearData(sender: UIBarButtonItem) {
@@ -81,6 +88,7 @@ class ResultsTableViewController: UITableViewController {
                     realm.deleteAll()
                 }
                 self.tableView.reloadData()
+                self.doneButton.style = .Done
                 numReadings = 0
             } catch {
                 let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
