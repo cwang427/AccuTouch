@@ -8,7 +8,7 @@
 
 ### Setup
 
-<img src="/images/TestModel.JPG" width = "500" title="Compatible Test Device">
+<img src="/images/TestModel.JPG" width = "750" title="Compatible Test Device">
 
 AccuTouch is meant to be used with an external device. Shown above is a testing model of laparoscopic forceps – a device that is used in minimally invasive surgery. Compatible testing models must have a tip that is responsive with the iDevice's capacitive touch screen (I happened to have a pen with a capacitive tip, so I used that). Wire should be run from the tip to the handles and should contact the user's hand throughout testing to ensure the screen responds to all touches.
 
@@ -30,9 +30,9 @@ Once data has been collected, it can be transferred to a computer for further pr
 
 ## Why is this Important?
 
-![Front Rendering](/images/FrontRender.JPG)
+<img src="/images/FrontRender.JPG" width="750" title="Front Rendering">
 
-![Perspective Rendering](/images/PerspectiveRender.JPG)
+<img src="/images/PerspectiveRender.JPG" width="750" title="Perspective Rendering">
 
 On one end of the spectrum, surgical device designers and manufacturers need methods to determine whether or not their models are suitable for the operating room. AccuTouch helps to bridge this gap between conceptual design and final product. Different design elements may be modified then tested using AccuTouch. The app simplifies data collection to allow the evaluator to quantitatively verify the device's effectiveness.
 
