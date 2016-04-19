@@ -18,6 +18,8 @@ Pictured above is Emory University Hospital's Laparoscopy Simulation Lab. The de
 
 ### Interacting with the App
 
+![Main Screen](/images/SimulatorSS.png)
+
 AccuTouch displays a blue target dot on the screen. The user tries to touch and hold on the dot as close to its center as possible using the testing device (e.g. forceps). Dot diameter can be configured in Settings according to the diameter of the capacitive tip. AccuTouch will automatically begin recording data upon the first touch, and it will automatically terminate the set once the set size has been reached (default 10, also configured in Settings).
 
 A set may be terminated at any time by pressing Stop, Settings, or Results.
