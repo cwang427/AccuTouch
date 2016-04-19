@@ -8,12 +8,11 @@
 
 ### Setup
 
-![Compatible Test Device](/images/TestModel.JPG)
+<img src="/images/TestModel.JPG" width = "250" title="Compatible Test Device">
 
 AccuTouch is meant to be used with an external device. Shown above is a testing model of laparoscopic forceps – a device that is used in minimally invasive surgery. Compatible testing models must have a tip that is responsive with the iDevice's capacitive touch screen (I happened to have a pen with a capacitive tip, so I used that). Wire should be run from the tip to the handles and should contact the user's hand throughout testing to ensure the screen responds to all touches.
 
-<!--![Emory Laparoscopy Simulation Lab](/images/SimulatedSurgery.jpg =250x)-->
-<img src="/images/SimulatedSurgery.jpg" width="48">
+<img src="/images/SimulatedSurgery.jpg" width="250" title="Emory Laparoscopy Simulation Lab">
 
 Pictured above is Emory University Hospital's Laparoscopy Simulation Lab. The device running AccuTouch should be placed inside the surgical environment so that the user can only view it through the monitor displaying a feed from the laparoscope (camera facing inside).
 
