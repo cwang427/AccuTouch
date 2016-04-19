@@ -12,6 +12,6 @@ import RealmSwift
 class DataSet: Object {
     
     dynamic var time: String = ""
-    dynamic var count: Int = 0
-    
+    dynamic var numData: Int = 0
+    dynamic var testType: String = ""
 }

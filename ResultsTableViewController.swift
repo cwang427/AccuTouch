@@ -12,6 +12,7 @@ import RealmSwift
 class ResultsTableViewController: UITableViewController {
 
     @IBOutlet weak var doneButton: UIBarButtonItem!
+    var items = [[DataPoint]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +32,6 @@ class ResultsTableViewController: UITableViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
 
     //Create auto-updating container to hold DataPoint objects
     var dataPoints: Results<DataPoint>! {
@@ -61,21 +55,45 @@ class ResultsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataSet = dataSets[section] as DataSet
-        return dataSet.count
+        return dataSet.numData
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ResultCell", forIndexPath: indexPath) as! ResultsTableViewCell
         
+        updateItemArray()
+        
+        let section = indexPath.section
         let row = indexPath.row
-        let dataPoint = dataPoints[row] as DataPoint
+        let dataPoint = items[section][row] as DataPoint
         cell.dataPoint = dataPoint
         
         return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Set \(section + 1)  –  \(dataSets[section].count) points  –  \(dataSets[section].time)"
+        var numDataString = ""
+        if (dataSets[section].numData == 1) {
+            numDataString = "\(dataSets[section].numData) point"
+        } else {
+            numDataString = "\(dataSets[section].numData) points"
+        }
+        return "Set \(section + 1)\r\n\(dataSets[section].testType)  –  \(numDataString)  –  \(dataSets[section].time)"
+    }
+    
+    func updateItemArray() {
+        var counter: Int = 0
+        var numTransferred: Int = 0
+        var tempArray: [DataPoint] = []
+        while (counter < dataSets?.count) {
+            tempArray = []
+            for _ in 0..<dataSets[counter].numData {
+                tempArray.append(dataPoints[numTransferred])
+                numTransferred += 1
+            }
+            items.append(tempArray)
+            counter += 1
+        }
     }
     
     @IBAction func clearData(sender: UIBarButtonItem) {

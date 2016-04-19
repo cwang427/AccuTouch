@@ -11,9 +11,15 @@ import AudioToolbox
 import RealmSwift
 
 var numReadings: Int = 0
+var diameter: Double = 5.08
+var setSize: Int = 10
+var testType: String = "Accuracy"
+var motionTracking: Bool = false
 
 class ViewController: UIViewController {
 
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     //Outlets for view constants
     @IBOutlet weak var originWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var originView: UIView!
@@ -53,14 +59,46 @@ class ViewController: UIViewController {
         readingStateLabel.text = "Not Recording"
         readingStateLabel.textColor = UIColor(colorLiteralRed: 255/255, green: 169/255, blue: 115/255, alpha: 1)
         
-        //Set up notification observer
+        //Load default values
+        if let diameterString = defaults.valueForKey("Diameter Field"), diameterSwitch = defaults.objectForKey("Diameter Switch") {
+            let diameterValue = Double(diameterString as! String)!
+            let units = diameterSwitch as! Bool ? "mm" : "in"
+            var mmDiameter = diameterValue
+            if (units == "in") {
+                mmDiameter = diameterValue * 25.4
+            }
+            diameter = mmDiameter
+        } else {
+            defaults.setValue("5.08", forKey: "Diameter Field")
+            defaults.setBool(true, forKey: "Diameter Switch")
+        }
+        if let numValues = defaults.stringForKey("Dataset Field") {
+            setSize = Int(numValues)!
+        } else {
+            defaults.setValue("10", forKey: "Dataset Field")
+        }
+        if let typeSwitch = defaults.objectForKey("Test Type Switch") {
+            let storedType = typeSwitch as! Bool ? "Accuracy" : "Precision"
+            testType = storedType
+        } else {
+            defaults.setValue(true, forKey: "Test Type Switch")
+        }
+        if let motionSwitch = defaults.objectForKey("Motion Tracking Switch") {
+            motionTracking = motionSwitch as! Bool
+        } else {
+            defaults.setValue(false, forKey: "Motion Tracking Switch")
+        }
+        
+        //Set up notification observer to save data before app becomes inactive
         let center = NSNotificationCenter.defaultCenter()
         let queue = NSOperationQueue.mainQueue()
         let appDelegate = UIApplication.sharedApplication().delegate
         center.addObserverForName("Application Resign Active", object: appDelegate, queue: queue) { notification in
             self.endReading()
         }
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         //Set pixel density for different devices
         let viewHeight = self.view.frame.height
         if (viewHeight == 480 || viewHeight == 568 || viewHeight == 667) {
@@ -73,7 +111,7 @@ class ViewController: UIViewController {
         }
         
         //Make origin point a circle whose profile matches forceps tip (0.2 inch = 5.08 mm diameter)
-        let pixelSides = 0.2 * pixelDensity
+        let pixelSides = (diameter/25.4) * pixelDensity
         let pointSides = pixelSides / screenScale
         originView.frame.size.height = CGFloat(pointSides)
         originView.frame.size.width = CGFloat(pointSides)
@@ -84,7 +122,7 @@ class ViewController: UIViewController {
         
         //Set top boundary for randomization
         let topOffset = Int(ceil(hudBar.center.y + hudBar.frame.height))
-        topBound = topOffset + Int(ceil(originHeightConstraint.constant)) + 10
+        topBound = topOffset + Int(ceil(originHeightConstraint.constant))
         
         //Set bottom boundary for randomization
         let bottomOffset = Int(floor(toolbar.center.y - toolbar.frame.height))
@@ -94,7 +132,12 @@ class ViewController: UIViewController {
         leftBound = Int(ceil(originWidthConstraint.constant)) + 10
         rightBound = Int(ceil(self.view.frame.width - originWidthConstraint.constant)) - 10
         
-        randomizePosition()
+        if (testType == "Accuracy") {
+            randomizePosition()
+        } else {
+            originCenterX.constant = 0
+            originCenterY.constant = 0
+        }
     }
     
     @IBAction func measurePointLong(sender: UILongPressGestureRecognizer) {
@@ -138,7 +181,7 @@ class ViewController: UIViewController {
                 
                 //If app is reading, create new data point and add to Realm
                 let newData = DataPoint()
-                newData.distance = "\(roundedDistance) ± 2.54"
+                newData.distance = "\(roundedDistance) ± \(round(100 * diameter/2) / 100)"
                 newData.coordinate = coordinateString
                 do {
                     let realm = try Realm()
@@ -155,10 +198,12 @@ class ViewController: UIViewController {
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             
-            randomizePosition()
+            if (testType == "Accuracy") {
+                randomizePosition()
+            }
             
             numReadings += 1
-            if (numReadings == 10) {
+            if (numReadings == setSize) {
                 endReading()
             }
             numReadingsLabel.text = "Count: \(numReadings)"
@@ -176,7 +221,8 @@ class ViewController: UIViewController {
             let duration = "\(Double(round(10 * stopTime) / 10)) seconds"
             let newDataSet = DataSet()
             newDataSet.time = duration
-            newDataSet.count = numReadings
+            newDataSet.numData = numReadings
+            newDataSet.testType = testType
             do {
                 let realm = try Realm()
                 try realm.write() {
@@ -198,14 +244,23 @@ class ViewController: UIViewController {
     }
     
     func randomizePosition() {
-        let xPosRandom = Int(arc4random_uniform(UInt32(rightBound - leftBound) + 1)) + leftBound
-        let yPosRandom = Int(arc4random_uniform(UInt32(bottomBound - topBound) + 1)) + topBound
-        
-        let xPosOffset = xPosRandom - Int(self.view.center.x)
-        let yPosOffset = yPosRandom - Int(self.view.center.y)
-        
-        originCenterX.constant = CGFloat(xPosOffset)
-        originCenterY.constant = CGFloat(yPosOffset)
+        if (rightBound - leftBound > 0 && bottomBound - topBound > 0) {
+            let xPosRandom = Int(arc4random_uniform(UInt32(rightBound - leftBound) + 1)) + leftBound
+            let yPosRandom = Int(arc4random_uniform(UInt32(bottomBound - topBound) + 1)) + topBound
+            
+            let xPosOffset = xPosRandom - Int(self.view.center.x)
+            let yPosOffset = yPosRandom - Int(self.view.center.y)
+            
+            originCenterX.constant = CGFloat(xPosOffset)
+            originCenterY.constant = CGFloat(yPosOffset)
+        } else {
+            let alert = UIAlertController(title: "Error: Out of Bounds", message: "Diameter setting is too large", preferredStyle: .Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default) { void in
+                self.performSegueWithIdentifier("OpenSettings", sender: self)
+                })
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 }
 
