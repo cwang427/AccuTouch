@@ -8,7 +8,7 @@
 
 ### Setup
 
-<img src="/images/TestModel.JPG" width = "250" title="Compatible Test Device">
+<img src="/images/TestModel.JPG" width = "500" title="Compatible Test Device">
 
 AccuTouch is meant to be used with an external device. Shown above is a testing model of laparoscopic forceps – a device that is used in minimally invasive surgery. Compatible testing models must have a tip that is responsive with the iDevice's capacitive touch screen (I happened to have a pen with a capacitive tip, so I used that). Wire should be run from the tip to the handles and should contact the user's hand throughout testing to ensure the screen responds to all touches.
 
@@ -18,7 +18,7 @@ Pictured above is Emory University Hospital's Laparoscopy Simulation Lab. The de
 
 ### Interacting with the App
 
-![Main Screen](/images/SimulatorSS.png)
+<img src="/images/SimulatorSS.png" width="250" title="Main Screen">
 
 AccuTouch displays a blue target dot on the screen. The user tries to touch and hold on the dot as close to its center as possible using the testing device (e.g. forceps). Dot diameter can be configured in Settings according to the diameter of the capacitive tip. AccuTouch will automatically begin recording data upon the first touch, and it will automatically terminate the set once the set size has been reached (default 10, also configured in Settings).
 
