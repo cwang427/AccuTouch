@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C307C9131CC02B3C00DC4C78 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C307C9121CC02B3C00DC4C78 /* DataPoint.swift */; };
+		C33990361CC51489007958CB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33990351CC51489007958CB /* SettingsTableViewController.swift */; };
+		C366C4C31CC5DB2200D79D59 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C366C4C21CC5DB2200D79D59 /* Default-568h@2x.png */; };
+		C3735F1E1C8E9333008E473F /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3735F1D1C8E9333008E473F /* ResultsTableViewCell.swift */; };
+		C3735F201C8E9364008E473F /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3735F1F1C8E9364008E473F /* ResultsTableViewController.swift */; };
+		C39009421C8E54DC00BB8D71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39009411C8E54DC00BB8D71 /* AppDelegate.swift */; };
+		C39009441C8E54DC00BB8D71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39009431C8E54DC00BB8D71 /* ViewController.swift */; };
+		C39009471C8E54DC00BB8D71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C39009451C8E54DC00BB8D71 /* Main.storyboard */; };
+		C39009491C8E54DC00BB8D71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39009481C8E54DC00BB8D71 /* Assets.xcassets */; };
+		C390094C1C8E54DC00BB8D71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C390094A1C8E54DC00BB8D71 /* LaunchScreen.storyboard */; };
+		C39009571C8E54DC00BB8D71 /* AccuTouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39009561C8E54DC00BB8D71 /* AccuTouchTests.swift */; };
+		C39009621C8E54DC00BB8D71 /* AccuTouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39009611C8E54DC00BB8D71 /* AccuTouchUITests.swift */; };
+		C3F397C21CC48D3E00657C42 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F397C11CC48D3E00657C42 /* DataSet.swift */; };
+		C3F397C61CC4E02300657C42 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F397C41CC4E00F00657C42 /* Realm.framework */; };
+		C3F397C71CC4E02300657C42 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3F397C41CC4E00F00657C42 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3F397C81CC4E02300657C42 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F397C51CC4E00F00657C42 /* RealmSwift.framework */; };
+		C3F397C91CC4E02300657C42 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3F397C51CC4E00F00657C42 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C39009531C8E54DC00BB8D71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C39009361C8E54DB00BB8D71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C390093D1C8E54DB00BB8D71;
+			remoteInfo = AccuTouch;
+		};
+		C390095E1C8E54DC00BB8D71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C39009361C8E54DB00BB8D71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C390093D1C8E54DB00BB8D71;
+			remoteInfo = AccuTouch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C307C9261CC02EF800DC4C78 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3F397C91CC4E02300657C42 /* RealmSwift.framework in Embed Frameworks */,
+				C3F397C71CC4E02300657C42 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C307C9121CC02B3C00DC4C78 /* DataPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
+		C33990351CC51489007958CB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		C366C4C21CC5DB2200D79D59 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C3735F1D1C8E9333008E473F /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
+		C3735F1F1C8E9364008E473F /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		C390093E1C8E54DB00BB8D71 /* AccuTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccuTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C39009411C8E54DC00BB8D71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C39009431C8E54DC00BB8D71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C39009461C8E54DC00BB8D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C39009481C8E54DC00BB8D71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C390094B1C8E54DC00BB8D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C390094D1C8E54DC00BB8D71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C39009521C8E54DC00BB8D71 /* AccuTouchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccuTouchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C39009561C8E54DC00BB8D71 /* AccuTouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccuTouchTests.swift; sourceTree = "<group>"; };
+		C39009581C8E54DC00BB8D71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C390095D1C8E54DC00BB8D71 /* AccuTouchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccuTouchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C39009611C8E54DC00BB8D71 /* AccuTouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccuTouchUITests.swift; sourceTree = "<group>"; };
+		C39009631C8E54DC00BB8D71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3F397C11CC48D3E00657C42 /* DataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
+		C3F397C41CC4E00F00657C42 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		C3F397C51CC4E00F00657C42 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C390093B1C8E54DB00BB8D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F397C81CC4E02300657C42 /* RealmSwift.framework in Frameworks */,
+				C3F397C61CC4E02300657C42 /* Realm.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C390094F1C8E54DC00BB8D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C390095A1C8E54DC00BB8D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C39009351C8E54DB00BB8D71 = {
+			isa = PBXGroup;
+			children = (
+				C366C4C21CC5DB2200D79D59 /* Default-568h@2x.png */,
+				C3F397C31CC4E00F00657C42 /* swift-2.2 */,
+				C39009401C8E54DC00BB8D71 /* AccuTouch */,
+				C39009551C8E54DC00BB8D71 /* AccuTouchTests */,
+				C39009601C8E54DC00BB8D71 /* AccuTouchUITests */,
+				C390093F1C8E54DB00BB8D71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C390093F1C8E54DB00BB8D71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C390093E1C8E54DB00BB8D71 /* AccuTouch.app */,
+				C39009521C8E54DC00BB8D71 /* AccuTouchTests.xctest */,
+				C390095D1C8E54DC00BB8D71 /* AccuTouchUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C39009401C8E54DC00BB8D71 /* AccuTouch */ = {
+			isa = PBXGroup;
+			children = (
+				C39009411C8E54DC00BB8D71 /* AppDelegate.swift */,
+				C307C9121CC02B3C00DC4C78 /* DataPoint.swift */,
+				C3F397C11CC48D3E00657C42 /* DataSet.swift */,
+				C39009431C8E54DC00BB8D71 /* ViewController.swift */,
+				C3735F1F1C8E9364008E473F /* ResultsTableViewController.swift */,
+				C3735F1D1C8E9333008E473F /* ResultsTableViewCell.swift */,
+				C39009451C8E54DC00BB8D71 /* Main.storyboard */,
+				C33990351CC51489007958CB /* SettingsTableViewController.swift */,
+				C39009481C8E54DC00BB8D71 /* Assets.xcassets */,
+				C390094A1C8E54DC00BB8D71 /* LaunchScreen.storyboard */,
+				C390094D1C8E54DC00BB8D71 /* Info.plist */,
+			);
+			path = AccuTouch;
+			sourceTree = "<group>";
+		};
+		C39009551C8E54DC00BB8D71 /* AccuTouchTests */ = {
+			isa = PBXGroup;
+			children = (
+				C39009561C8E54DC00BB8D71 /* AccuTouchTests.swift */,
+				C39009581C8E54DC00BB8D71 /* Info.plist */,
+			);
+			path = AccuTouchTests;
+			sourceTree = "<group>";
+		};
+		C39009601C8E54DC00BB8D71 /* AccuTouchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C39009611C8E54DC00BB8D71 /* AccuTouchUITests.swift */,
+				C39009631C8E54DC00BB8D71 /* Info.plist */,
+			);
+			path = AccuTouchUITests;
+			sourceTree = "<group>";
+		};
+		C3F397C31CC4E00F00657C42 /* swift-2.2 */ = {
+			isa = PBXGroup;
+			children = (
+				C3F397C41CC4E00F00657C42 /* Realm.framework */,
+				C3F397C51CC4E00F00657C42 /* RealmSwift.framework */,
+			);
+			path = "swift-2.2";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C390093D1C8E54DB00BB8D71 /* AccuTouch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C39009661C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouch" */;
+			buildPhases = (
+				C390093A1C8E54DB00BB8D71 /* Sources */,
+				C390093B1C8E54DB00BB8D71 /* Frameworks */,
+				C390093C1C8E54DB00BB8D71 /* Resources */,
+				C307C9261CC02EF800DC4C78 /* Embed Frameworks */,
+				C307C9271CC02FD500DC4C78 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AccuTouch;
+			productName = AccuTouch;
+			productReference = C390093E1C8E54DB00BB8D71 /* AccuTouch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C39009511C8E54DC00BB8D71 /* AccuTouchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C39009691C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouchTests" */;
+			buildPhases = (
+				C390094E1C8E54DC00BB8D71 /* Sources */,
+				C390094F1C8E54DC00BB8D71 /* Frameworks */,
+				C39009501C8E54DC00BB8D71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C39009541C8E54DC00BB8D71 /* PBXTargetDependency */,
+			);
+			name = AccuTouchTests;
+			productName = AccuTouchTests;
+			productReference = C39009521C8E54DC00BB8D71 /* AccuTouchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C390095C1C8E54DC00BB8D71 /* AccuTouchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C390096C1C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouchUITests" */;
+			buildPhases = (
+				C39009591C8E54DC00BB8D71 /* Sources */,
+				C390095A1C8E54DC00BB8D71 /* Frameworks */,
+				C390095B1C8E54DC00BB8D71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C390095F1C8E54DC00BB8D71 /* PBXTargetDependency */,
+			);
+			name = AccuTouchUITests;
+			productName = AccuTouchUITests;
+			productReference = C390095D1C8E54DC00BB8D71 /* AccuTouchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C39009361C8E54DB00BB8D71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Cassidy Wang";
+				TargetAttributes = {
+					C390093D1C8E54DB00BB8D71 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7H6UJAR6U8;
+					};
+					C39009511C8E54DC00BB8D71 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = C390093D1C8E54DB00BB8D71;
+					};
+					C390095C1C8E54DC00BB8D71 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = C390093D1C8E54DB00BB8D71;
+					};
+				};
+			};
+			buildConfigurationList = C39009391C8E54DB00BB8D71 /* Build configuration list for PBXProject "AccuTouch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C39009351C8E54DB00BB8D71;
+			productRefGroup = C390093F1C8E54DB00BB8D71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C390093D1C8E54DB00BB8D71 /* AccuTouch */,
+				C39009511C8E54DC00BB8D71 /* AccuTouchTests */,
+				C390095C1C8E54DC00BB8D71 /* AccuTouchUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C390093C1C8E54DB00BB8D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C390094C1C8E54DC00BB8D71 /* LaunchScreen.storyboard in Resources */,
+				C366C4C31CC5DB2200D79D59 /* Default-568h@2x.png in Resources */,
+				C39009491C8E54DC00BB8D71 /* Assets.xcassets in Resources */,
+				C39009471C8E54DC00BB8D71 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C39009501C8E54DC00BB8D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C390095B1C8E54DC00BB8D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C307C9271CC02FD500DC4C78 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C390093A1C8E54DB00BB8D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3F397C21CC48D3E00657C42 /* DataSet.swift in Sources */,
+				C307C9131CC02B3C00DC4C78 /* DataPoint.swift in Sources */,
+				C39009441C8E54DC00BB8D71 /* ViewController.swift in Sources */,
+				C39009421C8E54DC00BB8D71 /* AppDelegate.swift in Sources */,
+				C3735F1E1C8E9333008E473F /* ResultsTableViewCell.swift in Sources */,
+				C3735F201C8E9364008E473F /* ResultsTableViewController.swift in Sources */,
+				C33990361CC51489007958CB /* SettingsTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C390094E1C8E54DC00BB8D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C39009571C8E54DC00BB8D71 /* AccuTouchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C39009591C8E54DC00BB8D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C39009621C8E54DC00BB8D71 /* AccuTouchUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C39009541C8E54DC00BB8D71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C390093D1C8E54DB00BB8D71 /* AccuTouch */;
+			targetProxy = C39009531C8E54DC00BB8D71 /* PBXContainerItemProxy */;
+		};
+		C390095F1C8E54DC00BB8D71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C390093D1C8E54DB00BB8D71 /* AccuTouch */;
+			targetProxy = C390095E1C8E54DC00BB8D71 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C39009451C8E54DC00BB8D71 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C39009461C8E54DC00BB8D71 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C390094A1C8E54DC00BB8D71 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C390094B1C8E54DC00BB8D71 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C39009641C8E54DC00BB8D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C39009651C8E54DC00BB8D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C39009671C8E54DC00BB8D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/swift-2.2",
+					"$(PROJECT_DIR)/AccuTouch/swift-2.2",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "/Users/Cassidy/Dropbox/iOS/AccuTouch/AccuTouch/swift-2.2";
+				INFOPLIST_FILE = AccuTouch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.cassidywang.cwang.AccuTouch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C39009681C8E54DC00BB8D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/swift-2.2",
+					"$(PROJECT_DIR)/AccuTouch/swift-2.2",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "/Users/Cassidy/Dropbox/iOS/AccuTouch/AccuTouch/swift-2.2";
+				INFOPLIST_FILE = AccuTouch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.cassidywang.cwang.AccuTouch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C390096A1C8E54DC00BB8D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AccuTouchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cwang.AccuTouchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AccuTouch.app/AccuTouch";
+			};
+			name = Debug;
+		};
+		C390096B1C8E54DC00BB8D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AccuTouchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cwang.AccuTouchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AccuTouch.app/AccuTouch";
+			};
+			name = Release;
+		};
+		C390096D1C8E54DC00BB8D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AccuTouchUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cwang.AccuTouchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AccuTouch;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		C390096E1C8E54DC00BB8D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AccuTouchUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cwang.AccuTouchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AccuTouch;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C39009391C8E54DB00BB8D71 /* Build configuration list for PBXProject "AccuTouch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C39009641C8E54DC00BB8D71 /* Debug */,
+				C39009651C8E54DC00BB8D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C39009661C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C39009671C8E54DC00BB8D71 /* Debug */,
+				C39009681C8E54DC00BB8D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C39009691C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C390096A1C8E54DC00BB8D71 /* Debug */,
+				C390096B1C8E54DC00BB8D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C390096C1C8E54DC00BB8D71 /* Build configuration list for PBXNativeTarget "AccuTouchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C390096D1C8E54DC00BB8D71 /* Debug */,
+				C390096E1C8E54DC00BB8D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C39009361C8E54DB00BB8D71 /* Project object */;
+}
