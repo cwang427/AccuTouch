@@ -26,7 +26,7 @@ A set may be terminated at any time by pressing Stop, Settings, or Results.
 
 The "Test Type" setting determines whether or not the user is testing for accuracy or precision. Accuracy tests will move the target to a random location on the screen after each touch, while precision tests keep the target in the center of the screen. Data collection is the same, but the Test Type is indicated in Results.
 
-Once data has been collected, it can be transferred to a computer for further processing and statistical analysis (.csv export feature pending).
+Once data has been collected, it can be exported as a .csv file and emailed for further processing and statistical analysis using tools like Microsoft Excel.
 
 ## Why is this Important?
 
@@ -41,5 +41,3 @@ On the other end are surgeons and surgical residents who need to maintain a high
 ## Future Directions
 
 By using the CoreMotion framework, AccuTouch will be able to record deviceMotion (integrated accelerometer and gyroscope data) and display this data in graphs. This level of data visualization will indicate tremors involved during the procedure and provide insight into device stability.
-
-The next version of AccuTouch is scheduled to include the option to export data to .csv format, which can easily be imported into Microsoft Excel for more rigorous data processing.
