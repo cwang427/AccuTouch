@@ -2,7 +2,7 @@
 
 ## Overview
 
-**AccuTouch** is a data collection and visualization app designed for both surgeons and surgical devices – particularly those involved in minimally invasive surgery. When used in a simulated surgical environment, AccuTouch can give invaluable feedback on device stability and point-to-point accuracy.
+**AccuTouch** is a data collection and visualization app developed for both surgeons and surgical device designers – particularly those involved in minimally invasive surgery. When used in a simulated surgical environment, AccuTouch can give invaluable feedback on device stability and point-to-point accuracy.
 
 ## How to Use AccuTouch
 
