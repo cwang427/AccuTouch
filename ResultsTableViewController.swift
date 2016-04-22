@@ -8,11 +8,13 @@
 
 import UIKit
 import RealmSwift
+import MessageUI
 
-class ResultsTableViewController: UITableViewController {
+class ResultsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var doneButton: UIBarButtonItem!
     var items = [[DataPoint]]()
+    var maxRows: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +28,21 @@ class ResultsTableViewController: UITableViewController {
             dataSets = realm.objects(DataSet)
             dataPoints = realm.objects(DataPoint)
         } catch {
-            let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data. You may have to delete and reinstall AccuTouch.", preferredStyle: .Alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: animated)
     }
 
     //Create auto-updating container to hold DataPoint objects
@@ -55,6 +67,9 @@ class ResultsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataSet = dataSets[section] as DataSet
+        if (dataSet.numData > maxRows) {
+            maxRows = dataSet.numData
+        }
         return dataSet.numData
     }
 
@@ -83,9 +98,10 @@ class ResultsTableViewController: UITableViewController {
     
     func updateItemArray() {
         var counter: Int = 0
+        let maxCount = dataSets?.count
         var numTransferred: Int = 0
         var tempArray: [DataPoint] = []
-        while (counter < dataSets?.count) {
+        while (counter < maxCount) {
             tempArray = []
             for _ in 0..<dataSets[counter].numData {
                 tempArray.append(dataPoints[numTransferred])
@@ -108,8 +124,9 @@ class ResultsTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 self.doneButton.style = .Done
                 numReadings = 0
+                self.maxRows = 0
             } catch {
-                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data. You may have to delete and reinstall AccuTouch.", preferredStyle: .Alert)
                 
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -118,5 +135,89 @@ class ResultsTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //Enable export to .CSV
+    @IBAction func exportCSV(sender: UIBarButtonItem) {
+        let mailString: NSMutableString = generateString()
+        
+        //Convert to NSData
+        let data = mailString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let emailController = generateEmailController(data)
+        if (MFMailComposeViewController.canSendMail()) {
+            self.presentViewController(emailController, animated: true, completion: nil)
+        } else {
+            let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Please check email configuration and try again.", preferredStyle: .Alert)
+            sendMailErrorAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(sendMailErrorAlert, animated: true, completion: nil)
+        }
+    }
+    
+    func generateString() -> NSMutableString {
+        let mailString = NSMutableString()
+        var headers: String = ""
+        var labels: String = ""
+        var dataArray = [String](count: maxRows, repeatedValue: "")
+        
+        headers += ""
+        labels += "Point"
+        
+        for row in 0..<maxRows {
+            dataArray[row] += "\(row + 1)"
+        }
+        
+        for section in 0..<numberOfSectionsInTableView(self.tableView) {
+            
+            //Set up CSV headers
+            headers += ",Set #\(section + 1), , "
+            labels += ",Distance (mm),x (mm),y (mm)"
+            
+            for row in 0..<maxRows {
+                if row < items[section].count {
+                    let dataPoint = items[section][row] as DataPoint
+                    dataArray[row] += ",\(dataPoint.distance),\(dataPoint.xCoordinate),\(dataPoint.yCoordinate)"
+                } else {
+                    dataArray[row] += ", , , "
+                }
+            }
+            if (section == numberOfSectionsInTableView(self.tableView) - 1) {
+                for index in 0..<dataArray.count {
+                    dataArray[index] += "\n"
+                }
+            }
+        }
+        headers += "\n"
+        labels += "\n"
+        
+        mailString.appendString(headers)
+        mailString.appendString(labels)
+        for index in 0..<dataArray.count {
+            mailString.appendString(dataArray[index])
+        }
+        mailString.appendString("\n\n")
+        mailString.appendString("Error:, ± \(round(100 * diameter/2) / 100)")
+        
+        return mailString
+    }
+    
+    func generateEmailController(data: NSData?) -> MFMailComposeViewController {
+        let emailController = MFMailComposeViewController()
+        emailController.mailComposeDelegate = self
+        emailController.setSubject("CSV Data")
+        emailController.setMessageBody("", isHTML: false)
+        
+        //Attach .CSV
+        if let content = data {
+            emailController.addAttachmentData(content, mimeType: "text/csv", fileName: "AccuTouch Data")
+            return emailController
+        } else {
+            emailController.setMessageBody("Error attaching data", isHTML: false)
+            return emailController
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

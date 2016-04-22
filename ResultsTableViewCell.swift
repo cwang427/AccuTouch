@@ -16,8 +16,8 @@ class ResultsTableViewCell: UITableViewCell {
     var dataPoint: DataPoint? {
         didSet {
             if let dataPoint = dataPoint, measurementLabel = measurementLabel, coordinateLabel = coordinateLabel {
-                measurementLabel.text = "Distance (mm): \(dataPoint.distance)"
-                coordinateLabel.text = "Coordinate (mm): \(dataPoint.coordinate)"
+                measurementLabel.text = "Distance (mm): \(dataPoint.distance) ± \(round(100 * diameter/2) / 100)"
+                coordinateLabel.text = "Coordinate (mm): (\(dataPoint.xCoordinate), \(dataPoint.yCoordinate))"
             }
         }
     }

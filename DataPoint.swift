@@ -12,5 +12,6 @@ import RealmSwift
 class DataPoint: Object {
     
     dynamic var distance: String = ""
-    dynamic var coordinate: String = ""
+    dynamic var xCoordinate: String = ""
+    dynamic var yCoordinate: String = ""
 }

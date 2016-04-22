@@ -174,22 +174,21 @@ class ViewController: UIViewController {
             let yinchDistance = yPixelDistance / pixelDensity
             let mmYDistance = yinchDistance * 25.4
             let roundedYDistance = round(mmYDistance * 1000) / 1000
-
-            let coordinateString = "(\(roundedXDistance), \(roundedYDistance))"
             
             if (isReading) {
                 
                 //If app is reading, create new data point and add to Realm
                 let newData = DataPoint()
-                newData.distance = "\(roundedDistance) ± \(round(100 * diameter/2) / 100)"
-                newData.coordinate = coordinateString
+                newData.distance = "\(roundedDistance)"
+                newData.xCoordinate = "\(roundedXDistance)"
+                newData.yCoordinate = "\(roundedYDistance)"
                 do {
                     let realm = try Realm()
                     try realm.write() {
                         realm.add(newData)
                     }
                 } catch {
-                    let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data. You may have to delete and reinstall AccuTouch.", preferredStyle: .Alert)
                     
                     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
@@ -229,7 +228,7 @@ class ViewController: UIViewController {
                     realm.add(newDataSet)
                 }
             } catch {
-                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data", preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Error: Realm access", message: "Unable to access or modify Realm data. You may have to delete and reinstall AccuTouch.", preferredStyle: .Alert)
                 
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
